@@ -4,6 +4,8 @@ from PIL import Image
 from data.database import db_check
 import os
 
+login_status = False
+
 
 class Login(ctk.CTkFrame):
     def __init__(self, master):
@@ -34,8 +36,10 @@ class Login(ctk.CTkFrame):
             CTkMessagebox(title="Ошибка", message="Заполните все поля")
         elif db_check(self.entry_1.get(), self.entry_2.get()):
             self.entry_1.delete(0, "end")
-            self.entry_2.delete(0, "end") 
+            self.entry_2.delete(0, "end")
             self.button.focus()
+            global login_status
+            login_status = True
             CTkMessagebox(title="Success", message="Вход прошел успешно")
         else:
             CTkMessagebox(title="Ошибка", message="Неверное имя пользователя или пароль")

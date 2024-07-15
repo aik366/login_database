@@ -82,13 +82,17 @@ class App(ctk.CTk):
 
         # create third frame
         self.third_frame = ctk.CTkFrame(self, corner_radius=0, fg_color="transparent")
+        self.label_3 = ctk.CTkLabel(self.third_frame, text=f"{login.login_status}", font=("Roboto", 24, "bold"))
+        self.label_3.pack(pady=20, padx=10)
+
+        # set default frame
+        self.select_frame_by_name("home")
 
         # select default frame
         self.select_frame_by_name("home")
 
-        self.btn = login.Login(self)
-        print(self.btn.button.cget("text"))
-        self.btn.button.configure(command=self.frame_3_button_event)
+    def log_status(self):
+        print(login.login_status)
 
     def select_frame_by_name(self, name):
         # set button color for selected button
@@ -118,6 +122,7 @@ class App(ctk.CTk):
 
     def frame_3_button_event(self):
         self.select_frame_by_name("frame_3")
+        self.label_3.configure(text=f"{login.login_status}")
 
     def change_appearance_mode_event(self, new_appearance_mode):
         ctk.set_appearance_mode(new_appearance_mode)
